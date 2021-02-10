@@ -3,7 +3,7 @@ import re
 import mysql.connector
 from urllib.request import urlopen
 
-url = "https://www.battle-report.com/2019/12/21/warhammer-40k-itc-champions-missions-necrons-vs-ultramarines/"
+url = "https://www.battle-report.com/2020/02/02/warhammer-40k-maelstrom-of-war-imperial-soup-vs-imperial-fists/"
 page = urlopen(url)
 html = page.read().decode("utf-8")
 soup = BeautifulSoup(html, "html.parser")
@@ -54,6 +54,13 @@ while len(army2List)<=25:
     army2List.append(None)
 
 
+#for demo purpose
+print(armyList)
+print(army2List)
+print(p1result, " to ", p2result)
+#end
+
+
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -89,8 +96,9 @@ val= (p1result, p2result,
       army2List[15], army2List[16], army2List[17], army2List[18], army2List[19],
       army2List[20], army2List[21], army2List[22], army2List[23], army2List[24])
 
-mycursor.execute(sql, val, multi=True)
+execute = mycursor.execute(sql, val, multi=True)
+for repeat in execute:
+    print("value", repeat)
 
 mydb.commit()
-print (army2List[3])
 print("game recorded")
