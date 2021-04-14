@@ -1,0 +1,1 @@
+This module consists of a web scraper adapted to work with www.battle-report.com format of Warhammer 40k Battle reports.
